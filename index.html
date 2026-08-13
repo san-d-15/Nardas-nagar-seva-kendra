@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>नरदास नगर सेवाकेंद्र, भांडुप | SK2042</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=6">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+
+  <div class="hero-zone">
+
+    <!-- Floating Guru Card -->
+    <div class="floating-guru-card">
+      <div class="portrait-card">
+        <img src="./assets/images/guruji.png.png" alt="Swamiji">
+        <div class="name-plate">नरदास नगर सेवाकेंद्र, भांडुप</div>
+      </div>
+    </div>
+
+    <div class="header-col">
+      <!-- Top Header Bar -->
+      <header class="header-bar">
+        <div class="sk-badge">
+          <span class="sk-label">सेवाकेंद्र आयडी:</span>
+          <span class="sk-value">SK2042</span>
+        </div>
+        <span class="lotus">﹫</span>
+        <div class="title-block">
+          <h1>नरदास नगर सेवाकेंद्र, भांडुप</h1>
+          <p><span>📍 तालुका : मुलुंड</span><span class="divider">|</span><span>🏛️ जिल्हा : मुंबई</span></p>
+        </div>
+        <span class="lotus">﹫</span>
+      </header>
+
+      <!-- Nav Tabs -->
+      <nav class="nav-tabs">
+        <button class="nav-btn active" data-tab="home">🏠 मुख्यपृष्ठ</button>
+        <button class="nav-btn" data-tab="sheet">📅 उपस्थिती पत्रक</button>
+        <button class="nav-btn" data-tab="members">👥 सदस्य यादी</button>
+        <button class="nav-btn" data-tab="reports">📊 अहवाल</button>
+        <button class="nav-btn" data-tab="settings">⚙️ सेटिंग्ज</button>
+      </nav>
+    </div>
+
+    <!-- Stat Cards -->
+    <section class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon icon-maroon">👥</div>
+        <div>
+          <div class="stat-label">एकूण सदस्य</div>
+          <div class="stat-value" id="totalCount">0</div>
+          <div class="stat-sub">नोंदणीकृत सदस्य</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-green">✓</div>
+        <div>
+          <div class="stat-label">साप्ताहिक उपस्थित</div>
+          <div class="stat-value" id="presentCount">0</div>
+          <div class="stat-sub">उपस्थित सदस्य</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-red">📅</div>
+        <div>
+          <div class="stat-label">एकूण अनुपस्थिती</div>
+          <div class="stat-value" id="todayAbsentCount">0</div>
+          <div class="stat-sub">साप्ताहिक नोंद</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-blue">👤</div>
+        <div>
+          <div class="stat-label">एकूण अनुपस्थित</div>
+          <div class="stat-value" id="absentCount">0</div>
+          <div class="stat-sub">अनुपस्थित सदस्य</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div id="tab-home" class="tab-content" style="display: none;">
+      <div class="card quote-card" style="margin-bottom: 30px;">
+        <h3>मुख्यपृष्ठ लवकरच येत आहे</h3>
+        <p>अधिक माहिती आणि डॅशबोर्ड सारांश लवकरच उपलब्ध होईल.</p>
+      </div>
+    </div>
+
+    <div class="main-grid tab-content active" id="tab-sheet">
+
+      <main class="left-col">
+        <!-- Toolbar -->
+        <section class="card toolbar">
+          <div class="toolbar-date">
+            <button id="prevWeekBtn" class="nav-btn-small">◀ मागील रविवार</button>
+            <span class="cal-icon">🗓️</span>
+            <span id="todayDate" style="display: none;">आजची तारीख: —</span>
+            <input type="date" id="datePicker" class="date-picker-input" />
+            <button id="nextWeekBtn" class="nav-btn-small">पुढील रविवार ▶</button>
+            <span id="weekRange" class="week-range" style="display: none; margin-left: 10px;">साप्ताहिक कालावधी:
+              —</span>
+          </div>
+          <div class="toolbar-search">
+            <input type="text" id="searchInput" placeholder="नाव / मोबाईल / जनगणना क्र. शोधा...">
+            <button class="search-btn" aria-label="Search">🔍</button>
+          </div>
+          <div class="toolbar-filter">
+            <select id="statusFilter">
+              <option value="all">सर्व स्थिती</option>
+              <option value="present">उपस्थित</option>
+              <option value="absent">अनुपस्थित</option>
+            </select>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="export-btn" id="exportBtn">⬇ साप्ताहिक निर्यात</button>
+            <button class="export-btn" id="exportMonthlyBtn" style="background: var(--blue); color: white;">⬇ मासिक
+              निर्यात</button>
+          </div>
+        </section>
+
+        <!-- Table -->
+        <section class="card table-card">
+          <div class="table-container">
+            <table id="resultTable">
+              <thead>
+                <tr>
+                  <th>अ. क्र.</th>
+                  <th>नाव</th>
+                  <th>जनगणना क्र.</th>
+                  <th>मोबाईल क्र.</th>
+                  <th>स्थिती</th>
+                  <th>उपस्थिती नोंदवा</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+
+      <aside class="right-col">
+        <div class="card gauge-card">
+          <h3>साप्ताहिक उपस्थिती टक्केवारी</h3>
+          <div class="gauge" id="gauge">
+            <div class="gauge-value" id="percentCount">0%</div>
+          </div>
+          <div class="gauge-stats">
+            <div class="gauge-row"><span>👥 एकूण सदस्य</span><b id="sideTotalCount">0</b></div>
+            <div class="gauge-row"><span>✅ साप्ताहिक उपस्थित</span><b id="sidePresentCount">0</b></div>
+            <div class="gauge-row"><span>📅 साप्ताहिक अनुपस्थित</span><b id="sideAbsentCount">0</b></div>
+            <div class="gauge-row muted"><span>🕒 शेवटची अपडेट</span><b id="lastUpdate">—</b></div>
+          </div>
+        </div>
+
+        <div class="card quote-card">
+          <h3>धर्मो रक्षति रक्षितः</h3>
+          <p>धर्माचे रक्षण करणाऱ्यांचे धर्म संरक्षण करतो.</p>
+          <div class="quote-divider">➜ 🪷 ⬅</div>
+        </div>
+      </aside>
+
+    </div>
+
+    <div id="tab-members" class="tab-content" style="display: none;">
+      <section class="card mb-4" style="margin-bottom: 26px;">
+        <h3 style="margin-top: 0; color: var(--royal-maroon);">नवीन सदस्य जोडा / संपादित करा</h3>
+        <form id="memberForm" class="member-form">
+          <input type="hidden" id="memberId">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>नाव</label>
+              <input type="text" id="memberName" required>
+            </div>
+            <div class="form-group">
+              <label>जनगणना क्र.</label>
+              <input type="text" id="memberCensus">
+            </div>
+            <div class="form-group">
+              <label>मोबाईल क्र.</label>
+              <input type="text" id="memberMobile">
+            </div>
+            <div class="form-group">
+              <label>वर्ग (पुरुष/महिला)</label>
+              <select id="memberCategory">
+                <option value="पुरुष">पुरुष</option>
+                <option value="महिला">महिला</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-actions" style="margin-top: 16px; display: flex; gap: 10px;">
+            <button type="submit" class="export-btn">सेव्ह करा</button>
+            <button type="button" class="export-btn" id="btnCancelEdit"
+              style="display: none; background: #eee; color: #333;">रद्द करा</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card table-card">
+        <div class="table-container">
+          <table id="membersTable">
+            <thead>
+              <tr>
+                <th>नाव</th>
+                <th>जनगणना क्र.</th>
+                <th>मोबाईल क्र.</th>
+                <th>वर्ग</th>
+                <th>कृती</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <div id="tab-reports" class="tab-content" style="display: none;">
+      <div class="card quote-card" style="margin-bottom: 30px;">
+        <h3>अहवाल लवकरच येत आहे</h3>
+        <p>विविध प्रकारचे अहवाल येथे दिसतील.</p>
+      </div>
+    </div>
+
+    <div id="tab-settings" class="tab-content" style="display: none;">
+      <div class="card quote-card" style="margin-bottom: 30px;">
+        <h3>सेटिंग्ज लवकरच येत आहे</h3>
+        <p>डेटा एक्सपोर्ट/इम्पोर्ट आणि इतर सेटिंग्ज येथे उपलब्ध होतील.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span class="diya">🪔</span>
+    <p>© 2026 नरदास नगर सेवाकेंद्र, भांडुप | सर्व हक्क सुरक्षित</p>
+    <span class="diya">🪔</span>
+  </footer>
+
+  <script src="roster.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
